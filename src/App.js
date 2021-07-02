@@ -6,34 +6,32 @@ import ContentLayout from './ContentLayout';
 import SideBar from './SideBar';
 
 class App extends Component {
-  render() {
-      const characters = [
-        {
-          date: 'date1',
-          ppt_title: 'titile1',
-          summary: 'sum1',
-          attachment: 'att1'
-        },
-        {
-          date: 'date2',
-          ppt_title: 'titile2',
-          summary: 'sum2',
-          attachment: 'att2'
-        },
-        {
-          date: 'date3',
-          ppt_title: 'titile3',
-          summary: 'sum3',
-          attachment: 'att3'
-        },
-        {
-          date: 'date4',
-          ppt_title: 'titile4',
-          summary: 'sum4',
-          attachment: 'att4'
-        },
-      ]
+  state = {
+    data: [],
+  }
+
+  componentDidMount() {
+    const url =
+      'http://0.0.0.0:8000/event/'
       
+    fetch(url)
+      .then((result) => result.json())
+      .then((result) => {
+        console.log(result)
+        this.setState({
+          data: result,
+        })
+      })
+  }
+
+  render() {
+     
+    const {data} = this.state
+
+    const result = data.map((entry, index) => {
+      return <li key={index}>{entry}</li>
+    })
+
     return (
       <Container fluid className="MainPage">
         <Row className="top-bar">
@@ -42,7 +40,7 @@ class App extends Component {
         </Row>
         <Row className="bottom-layout">
           <Col className="side-bar-layout" md={{span: 2}}><SideBar  changeButton={this.changeButton}/></Col>
-          <Col className="content-layout" md={{span: 10}}><ContentLayout /></Col>
+          <Col className="content-layout" md={{span: 10}}><ul>{result}</ul></Col>
         </Row>
       </Container>
     )
