@@ -64,16 +64,16 @@ li:hover {
   background-color: #F6F8F8;
 }
 .logo-bar{
-  top: 32px;
+  top: 5px;
   width: 219px;
   height: 45px;
   background: transparent 0% 0% no-repeat padding-box;
   opacity: 1;
-  background-color:#F6F8F8;
+  background-color:#f6f8f8;
   text-align: center;
 }
 .search-bar{
-  background-color:#F3F5F6;
+  background-color:#3aa0be;
 }
 
 .SearchForm{
@@ -119,7 +119,7 @@ li:hover {
   left: -1px;
   width: 100%;
   height: 5vh;
-  background: #F6F8F8 0% 0% no-repeat padding-box;
+  background: #3aa0be 0% 0% no-repeat padding-box;
   opacity: 1;
   font-weight: bold;
   font: 'Medium 20px/70px Roboto';
@@ -152,12 +152,12 @@ li:hover {
 }
 .side-bar-layout{
   height:100%;
-  background-color: #F6F8F8;
+  background-color: #3aa0be;
 }
 
 .content-layout{
   height:100%;
-  background-color: #F3F5F6;
+  background-color: #9acce6;
 }
 .table-content-layout{
   height:50%;

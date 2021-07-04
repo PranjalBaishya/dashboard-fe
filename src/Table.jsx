@@ -8,7 +8,6 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import Pagination from '@material-ui/lab/Pagination';
 import TableRow from '@material-ui/core/TableRow';
-import axios from 'axios';
 
 const StyledTableRow = withStyles((theme) => ({
   root: {
@@ -22,8 +21,8 @@ const columns = [
   { id: 'date', label: 'Date', minWidth: 170 },
   { id: 'title', label: 'Title', minWidth: 100 },
   {
-    id: 'summary',
-    label: 'Summary',
+    id: 'event_type',
+    label: 'Event Type',
     minWidth: 170,
     maxWidth: 500,
     align: 'left',
@@ -37,10 +36,18 @@ const columns = [
     align: 'left',
     format: (value) => value.toLocaleString('en-US'),
   },
+  {
+    id: 'category',
+    label: 'Meeting/Conference',
+    minWidth: 170,
+    maxWidth: 500,
+    align: 'left',
+    format: (value) => value.toLocaleString('en-US'),
+  },
 ];
 
-function createData(date, title, summary, attachment) {
-  return { date, title, summary, attachment };
+function createData(date, title, event_type, attachment, category) {
+  return { date, title, event_type, attachment, category };
 }
 
 var rows = [];
@@ -55,39 +62,39 @@ const useStyles = makeStyles({
 });
 
 var currentKeyword='';
-export default  function StickyHeadTable(args) {
-  
+export default  function StickyHeadTable(args) {  
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   
   const handleChangePage = async (event, newPage) => {
     newPage--;
-    //update rows variable
-    
-    // var data = args.defaultRows;
-    // rows=[];
-    // console.log(newPage)
-    // for(var i=0; i<=10; i++){
-    //   var d = createData(data.data[i].date,data.data[i].title,data.data[i].summary,<a href={data.data[i].attachment} target="_blank">Download pdf</a>);
-    //   rows.push(d); 
-    // }
-     let url =
-      'http://0.0.0.0:8000/event/models/'+ currentKeyword +'/'
+
+    let url
+    if (currentKeyword === undefined){
+      url = 'http://0.0.0.0:8000/event/'
+    } else {
+      url = 'http://0.0.0.0:8000/event/models/'+ currentKeyword +'/'
+    }
         
-        fetch(url)
-        .then((result) => result.json())
-        .then((data) => {
-          console.log(data)
-          var rows=[];
-          console.log(data.data.length)
-          console.log(newPage)
-          for(var i=(newPage*10)+1; i<=(newPage+1)*10; i++){
-            var d = createData(data.data[i].date,data.data[i].title,data.data[i].summary,<a href={data.data[i].attachment} target="_blank">Download pdf</a>);
-            rows.push(d);
-            console.log(rows)
-          }
-        })
+    fetch(url)
+    .then((result) => result.json())
+    .then((data) => {
+
+      console.log(newPage)
+      rows=[];
+
+      var start = (newPage*10);
+      var end = (newPage+1)*10;
+      console.log('start: ', start, ' end: ', end)
+
+      for(var i=start; i<end; i++){
+        var d = createData(data.data[i].date,data.data[i].title,data.data[i].event_type,<a href={data.data[i].attachment} target="_blank">Download pdf</a>, data.data[i].category);
+        rows.push(d);
+      }
+      console.log(rows)
+    })
+    setRowsPerPage(10);
     setPage(newPage);
   };
 
@@ -131,7 +138,7 @@ export default  function StickyHeadTable(args) {
           </TableBody>
         </Table>
       </TableContainer>
-      <Pagination count={11} variant="outlined" shape="rounded" page={page} onChange={handleChangePage} style={{marginTop:'1%'}}/>
+      <Pagination count={11} variant="outlined" shape="rounded" onChange={handleChangePage} style={{marginTop:'1%'}}/>
     </Paper>
   );
 }

@@ -39,35 +39,38 @@ class ContentLayout extends React.Component {
     }
 
     func = ()=>{
-      if(this.props.contentType==="Dashboard"){
+      var content_type = this.props.contentType
+      if(content_type === "search-results" || content_type === undefined || content_type === "Dashboard"){
         return (<div style={{height:'100%'}}>
-                  <div style={{height:'90%'}}>
+                  <div style={{height:'80%'}}>
                     <Table searchkeyword={this.props.searchkeyword} defaultRows={this.props.defaultRows} />
                   </div> 
                </div>);
       }
-      else if(this.props.contentType==="Dashboard"){
-        return this.textFunction(0);
-      } else if(this.props.contentType==="Articles"){
+      else if(this.props.contentType==="Articles"){
         return this.textFunction(1);
-      }else if(this.props.contentType==="Analytics"){
+      }
+      else if(this.props.contentType==="Analytics"){
         return this.textFunction(2);
-      }else if(this.props.contentType==="Messages"){
+      }
+      else if(this.props.contentType==="Messages"){
         return this.textFunction(3);
-      }else if(this.props.contentType==="Calendar"){
+      }
+      else if(this.props.contentType==="Calendar"){
         return this.textFunction(4);
-      }else{
+      }
+      else{
         return this.textFunction(0);
       }
   }
 
-    render(){
-      return (
-        <div style={{height:"100%",width:"100%"}}>
-          {this.func()}
-        </div>
-        );
-    }
+  render(){
+    return (
+      <div style={{height:"100%",width:"100%"}}>
+        {this.func()}
+      </div>
+      );
+  }
 }
 
 export default ContentLayout;
