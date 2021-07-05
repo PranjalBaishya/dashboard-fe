@@ -64,10 +64,14 @@ const useStyles = makeStyles({
 var currentKeyword='';
 export default  function StickyHeadTable(args) {  
   const classes = useStyles();
-  const [page, setPage] = React.useState(0);
+
+  const [posts, setPosts] = React.useState([]);
+  const [loading, setLoading] = React.useState(false);
+  const [page, setPage] = React.useState(1);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   
   const handleChangePage = async (event, newPage) => {
+    setLoading(true);
     newPage--;
 
     let url
@@ -81,7 +85,7 @@ export default  function StickyHeadTable(args) {
     .then((result) => result.json())
     .then((data) => {
 
-      console.log(newPage)
+      console.log('newPage is: ', newPage);
       rows=[];
 
       var start = (newPage*10);
@@ -89,12 +93,20 @@ export default  function StickyHeadTable(args) {
       console.log('start: ', start, ' end: ', end)
 
       for(var i=start; i<end; i++){
-        var d = createData(data.data[i].date,data.data[i].title,data.data[i].event_type,<a href={data.data[i].attachment} target="_blank">Download pdf</a>, data.data[i].category);
+        var d ;
+        if (data.data[i].attachment === 'NA') {
+          d = createData(data.data[i].date,data.data[i].title,data.data[i].event_type,data.data[i].attachment, data.data[i].category);
+        }
+        else {
+          d = createData(data.data[i].date,data.data[i].title,data.data[i].event_type,<a href={data.data[i].attachment} target="_blank">Download pdf</a>, data.data[i].category);
+        }
         rows.push(d);
       }
-      console.log(rows)
-    })
-    setRowsPerPage(10);
+
+      console.log(rows);
+      setPosts(rows);
+    });
+    setLoading(false);
     setPage(newPage);
   };
 
@@ -138,7 +150,7 @@ export default  function StickyHeadTable(args) {
           </TableBody>
         </Table>
       </TableContainer>
-      <Pagination count={11} variant="outlined" shape="rounded" onChange={handleChangePage} style={{marginTop:'1%'}}/>
+      <Pagination count={11} color="primary" variant="outlined" shape="rounded" onChange={handleChangePage} style={{marginTop:'1%'}}/>
     </Paper>
   );
 }

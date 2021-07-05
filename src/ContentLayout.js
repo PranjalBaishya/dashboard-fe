@@ -13,13 +13,13 @@ class ContentLayout extends React.Component {
       if (textNumber===0){
         text = "Search for presentations.";
       }else if (textNumber===1){
-        text = "Sorry, no articles to display at the moment.";
-      }else if (textNumber===2){
         text = "Sorry, no analytics to display at the moment.";
+      }else if (textNumber===2){
+        text = "Sorry, no events to display at the moment.";
       }else if (textNumber===3){
-        text = "Sorry, no messages to display at the moment.";
+        text = "Sorry, no bookmarks to display at the moment.";
       }else if (textNumber===4){
-        text = "Sorry, no calendar to display at the moment.";
+        text = "Website: Weyerhaeuser";
       }
       return (<div style={{height:'100%'}}>
                 <div style={{height:'30%'}}><br/><br/><br/><br/>
@@ -47,17 +47,30 @@ class ContentLayout extends React.Component {
                   </div> 
                </div>);
       }
-      else if(this.props.contentType==="Articles"){
+      else if(this.props.contentType==="Analytics"){
         return this.textFunction(1);
       }
-      else if(this.props.contentType==="Analytics"){
+      else if(this.props.contentType==="Calendar"){
         return this.textFunction(2);
       }
-      else if(this.props.contentType==="Messages"){
+      else if(this.props.contentType==="Bookmarks"){
         return this.textFunction(3);
       }
-      else if(this.props.contentType==="Calendar"){
-        return this.textFunction(4);
+      else if(this.props.contentType==="About"){
+        return (<div style={{height:'100%'}}>
+        <div style={{height:'30%'}}><br/><br/><br/><br/>
+            <p style={{width: '48%',
+                height: '80%',
+                marginLeft:'20%',
+                textAlign: 'center',
+                font: 'Bold 30px/35px Roboto',
+                letterSpacing: '0px',
+                color: '#FFFFFF'}}>About <a href="http://investor.weyerhaeuser.com/events-and-presentations">Weyerhaeuser</a>:
+                <br />For more than a century, we’ve been growing trees and making forest products that improve lives in fundamental ways. We manage our millions of acres of forests on a continuous and fully sustainable cycle. We are responsible stewards of our land for multiple uses, including recreation, conservation, economic development and different forms of renewable energy. And the wood products we make are used to build homes where families are sheltered and raised. 
+
+We’re proud of what we do and how we do it, and we invite you to learn more.</p>
+        </div>
+      </div>);
       }
       else{
         return this.textFunction(0);

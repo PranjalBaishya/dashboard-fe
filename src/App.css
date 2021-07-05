@@ -1,43 +1,3 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-.dropdown {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 300px;
-  z-index: 2;
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14);
-}
-
 ul {
   list-style: none;
   padding: 0;
@@ -96,7 +56,7 @@ li:hover {
   height:4vh;
   width:10%;
   padding:0.5%;
-  margin-left:12vw;
+  margin-left:2vw;
   text-align: center;
   font: Bold 90% Roboto;
   letter-spacing: 0px;
@@ -105,14 +65,6 @@ li:hover {
   background: #4CA2FF 0% 0% no-repeat padding-box;
   border-radius: 26px;
 }
-.dropdownbox{
-  height:4vh;
-  width:10%;
-  flex: auto;
-  margin-top: -4.5vh;
-  margin-left: 36vw;
-  position: relative;
-}
 
 .SideBarTitles{
   
@@ -120,6 +72,7 @@ li:hover {
   width: 100%;
   height: 5vh;
   background: #3aa0be 0% 0% no-repeat padding-box;
+  color: #FFFFFF;
   opacity: 1;
   font-weight: bold;
   font: 'Medium 20px/70px Roboto';
@@ -135,17 +88,6 @@ li:hover {
   outline:none
 }
 
-.table{
-  margin: 10px;
-  padding: 5px;
-  border: solid 2px #000;
-  border-radius: 10px;
-  background-color: lavenderblush;
-}
-.table-header{
-  background-color: #24afda;
-}
-
 /*bottom pane*/
 .bottom-layout{
   height:88%;
@@ -159,16 +101,6 @@ li:hover {
   height:100%;
   background-color: #9acce6;
 }
-.table-content-layout{
-  height:50%;
-  background-color: #F3F5F6;
-}
-
-.graph-content-layout{
-  height:50%;
-  background-color: #F3F5F6;
-}
-
 
 .layout{
   height:85%;
@@ -179,12 +111,4 @@ li:hover {
 }
 .main-content {
   background-color: blue;
-}
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
